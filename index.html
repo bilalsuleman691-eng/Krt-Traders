@@ -382,7 +382,23 @@
 <div>
     
 </div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBxmMMtn-BiCTCdjtIZGYQGLIOGRE7sEN0",
+    authDomain: "krt-traders-6ec25.firebaseapp.com",
+    projectId: "krt-traders-6ec25",
+    storageBucket: "krt-traders-6ec25.firebasestorage.app",
+    messagingSenderId: "736229162604",
+    appId: "1:736229162604:web:8e14b9402282753bb82249",
+    measurementId: "G-DGF7YNLTB3"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 </body>
 
 
