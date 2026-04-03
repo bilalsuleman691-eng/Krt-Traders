@@ -1,5 +1,12 @@
-// 1. Database Initialize (Firebase Ready)
-let db = { in: [], out: [], ledgers: {}, opening_balances: {}, rent: [] };
+// ISAY UPDATE KAREIN
+let db = { 
+    in: [], 
+    out: [], 
+    ledgers: {}, 
+    opening_balances: {}, 
+    rent: [],         // Rent ab yahan online save hoga
+    extraUsers: []    // Naye users bhi yahan online save honge
+};
 
 // 2. Online Sync Functions
 async function loadOnlineData() {
