@@ -13,6 +13,18 @@ async function loadOnlineData() {
         console.error("Data load nahi hua:", error);
     }
 }
+// ISAY LIKHEIN
+async function saveAndRefresh() {
+    try {
+        // Data ko seedha Google Cloud par bhejein
+        await db_online.collection("erp_data").doc("krt_main").set(db);
+        renderAll();
+        console.log("Mubarak! Data Online Save Ho Gaya.");
+    } catch (error) {
+        console.error("Save Error:", error);
+        alert("Internet masla kar raha hai, data save nahi hua!");
+    }
+}
 /// --- UPDATED LOGIN SYSTEM ---
 function login() {
     let u = document.getElementById('user').value.trim();
