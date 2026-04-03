@@ -1,28 +1,29 @@
-// ISAY LIKHEIN
-let db = { in: [], out: [] }; // Shuru mein khali rakhein
+// 1. Database Initialize (Firebase Ready)
+let db = { in: [], out: [], ledgers: {}, opening_balances: {}, rent: [] };
 
+// 2. Online Sync Functions
 async function loadOnlineData() {
     try {
         const doc = await db_online.collection("erp_data").doc("krt_main").get();
         if (doc.exists) {
             db = doc.data();
+            // Naye features ke liye structure check
+            if (!db.ledgers) db.ledgers = {};
+            if (!db.rent) db.rent = [];
             renderAll();
             console.log("Online Data Load Ho Gaya!");
         }
     } catch (error) {
-        console.error("Data load nahi hua:", error);
+        console.error("Data load error:", error);
     }
 }
-// ISAY LIKHEIN
+
 async function saveAndRefresh() {
     try {
-        // Data ko seedha Google Cloud par bhejein
         await db_online.collection("erp_data").doc("krt_main").set(db);
         renderAll();
-        console.log("Mubarak! Data Online Save Ho Gaya.");
     } catch (error) {
-        console.error("Save Error:", error);
-        alert("Internet masla kar raha hai, data save nahi hua!");
+        alert("Internet masla! Data save nahi hua.");
     }
 }
 /// --- UPDATED LOGIN SYSTEM ---
