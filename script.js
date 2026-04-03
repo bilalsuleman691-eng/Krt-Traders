@@ -14,17 +14,18 @@ async function loadOnlineData() {
         const doc = await db_online.collection("erp_data").doc("krt_main").get();
         if (doc.exists) {
             db = doc.data();
-            // Naye features ke liye structure check
+            // In lines ko check karein
             if (!db.ledgers) db.ledgers = {};
-            if (!db.rent) db.rent = [];
+            if (!db.rent) db.rent = []; 
+            if (!db.extraUsers) db.extraUsers = []; // Safety check
+            
             renderAll();
-            console.log("Online Data Load Ho Gaya!");
+            console.log("Mubarak! Sab kuch online load ho gaya.");
         }
     } catch (error) {
         console.error("Data load error:", error);
     }
 }
-
 async function saveAndRefresh() {
     try {
         await db_online.collection("erp_data").doc("krt_main").set(db);
