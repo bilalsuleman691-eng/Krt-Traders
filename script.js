@@ -345,9 +345,7 @@ function editEntry(type, index) {
 }
 
 
-// --- 1. EXTRA USERS DATABASE ---
-// Yeh sirf un accounts ke liye hai jo aap Multi-User tab se banayenge
-let extraUsers = JSON.parse(localStorage.getItem('krt_extra_users')) || [];
+
 
 // --- 2. MULTI-USER LOGIN LOGIC (Existing login ke andar fit karein) ---
 // Isko apne purane login function ke bilkul niche check karwane ke liye istemal karein
@@ -434,14 +432,19 @@ function loadUserTable() {
 }
 
 function deleteExtraUser(index) {
-    if(confirm("Kya aap is user ko delete karna chahte hain?")) {
-        extraUsers.splice(index, 1);
-        localStorage.setItem('krt_extra_users', JSON.stringify(extraUsers));
+    if(confirm("Kya aap waqai is user ko delete karna chahte hain?")) {
+        // 1. Local variable ki bajaye main 'db' object se delete karein
+        db.extraUsers.splice(index, 1);
+        
+        // 2. Firebase par update bhejien taake har mobile se delete ho jaye
+        saveAndRefresh(); 
+        
+        // 3. Table ko dobara load karein
         loadUserTable();
+        
+        alert("User Online delete ho gaya!");
     }
 }
-
-
 // Database structure check
 if (!db.ledgers) db.ledgers = {}; 
 if (!db.opening_balances) db.opening_balances = {};
@@ -540,9 +543,6 @@ function showLedger() {
     document.getElementById('final-balance').innerText = "Kul Udhaar: " + currentBalance.toLocaleString();
     updateCustomerDropdown();
 }
-// Rent Database
-let dbRent = JSON.parse(localStorage.getItem('krt_rent_data')) || [];
-
 function addRentEntry() {
     const nameInput = document.getElementById('rent-name').value.trim();
     const shopInput = document.getElementById('rent-shop-no').value;
@@ -557,7 +557,6 @@ function addRentEntry() {
         return;
     }
 
-    // Naya Entry Object
     const newEntry = {
         name: nameInput,
         shop: shopInput,
@@ -568,14 +567,21 @@ function addRentEntry() {
         method: methodInput
     };
 
-    // LOCAL STORAGE KHATAM - AB ONLINE DB MEIN JAYEGA
+    // AB YEH MAIN DB MEIN ONLINE JAYEGA
     db.rent.push(newEntry); 
-    saveAndRefresh(); // Yeh function data ko Firebase (Online) bhej dega
+    
+    // Firebase sync aur refresh
+    saveAndRefresh(); 
     
     alert(nameInput + " ki entry Online save ho gayi!");
     renderRentTable(); 
+    
+    // Inputs saaf karein
+    document.getElementById('rent-shop-no').value = "";
+    document.getElementById('rent-debit').value = "0";
+    document.getElementById('rent-credit').value = "0";
 }
-
+   
 // Yeh function naam check karke table update karega
 function renderRentTable() {
     const tbody = document.getElementById('rent-main-rows');
