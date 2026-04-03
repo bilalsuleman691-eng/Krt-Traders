@@ -563,13 +563,11 @@ function addRentEntry() {
         method: methodInput
     };
 
-    // Data Save karein
-    dbRent.push(newEntry);
-    localStorage.setItem('krt_rent_data', JSON.stringify(dbRent));
-
-    alert(nameInput + " ki entry save ho gayi!");
+    // LOCAL STORAGE KHATAM - AB ONLINE DB MEIN JAYEGA
+    db.rent.push(newEntry); 
+    saveAndRefresh(); // Yeh function data ko Firebase (Online) bhej dega
     
-    // Foran Ledger Update karein (Wahi logic jo aapne manga)
+    alert(nameInput + " ki entry Online save ho gayi!");
     renderRentTable(); 
 }
 
