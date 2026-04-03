@@ -400,13 +400,17 @@ function createNewUser() {
         return; 
     }
 
-    // Naya user save karein
-    extraUsers.push({ id: id, pass: pass, name: name, perms: selectedPerms });
-    localStorage.setItem('krt_extra_users', JSON.stringify(extraUsers));
+    function createNewUser() {
+    let name = document.getElementById('new-username').value;
+    // ... baaki inputs ...
+
+    // AB YEH BHI ONLINE SAVE HOGA
+    db.extraUsers.push({ id: id, pass: pass, name: name, perms: selectedPerms });
+    saveAndRefresh(); // Online Sync
     
-    alert("Naya Account Ban Gaya!");
-    loadUserTable(); // Table refresh
-    
+    alert("Naya Account Online Ban Gaya!");
+    loadUserTable(); 
+}
     // Form clear karein
     document.getElementById('new-username').value = '';
     document.getElementById('new-userid').value = '';
