@@ -1,14 +1,18 @@
-// --- 1. DATABASE INITIALIZATION ---
-let db = JSON.parse(localStorage.getItem('krt_erp_data')) || {
-    in: [],
-    out: []
-};
+// ISAY LIKHEIN
+let db = { in: [], out: [] }; // Shuru mein khali rakhein
 
-function saveAndRefresh() {
-    localStorage.setItem('krt_erp_data', JSON.stringify(db));
-    renderAll();
+async function loadOnlineData() {
+    try {
+        const doc = await db_online.collection("erp_data").doc("krt_main").get();
+        if (doc.exists) {
+            db = doc.data();
+            renderAll();
+            console.log("Online Data Load Ho Gaya!");
+        }
+    } catch (error) {
+        console.error("Data load nahi hua:", error);
+    }
 }
-
 /// --- UPDATED LOGIN SYSTEM ---
 function login() {
     let u = document.getElementById('user').value.trim();
