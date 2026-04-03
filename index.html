@@ -377,28 +377,26 @@
     <div style="position: fixed; bottom: 0; width: 100%; background: #eee; text-align: center; padding: 5px; font-size: 12px; border-top: 1px solid #ccc;">
         KRT TRADERS SOFTWARE v4.0 | No JavaScript Mode | Build 2026-X
     </div>
-    
-<script src="script.js"></script>
-<div>
-    
-</div>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
 <script>
+  // 2. Aapka Config (Image wala code yahan paste karein)
   const firebaseConfig = {
-    apiKey: "AIzaSyBxmMMtn-BiCTCdjtIZGYQGLIOGRE7sEN0",
-    authDomain: "krt-traders-6ec25.firebaseapp.com",
-    projectId: "krt-traders-6ec25",
-    storageBucket: "krt-traders-6ec25.firebasestorage.app",
-    messagingSenderId: "736229162604",
-    appId: "1:736229162604:web:8e14b9402282753bb82249",
-    measurementId: "G-DGF7YNLTB3"
+    apiKey: "AIzaSy...", 
+    authDomain: "krt-traders-erp.firebaseapp.com",
+    projectId: "krt-traders-erp",
+    storageBucket: "krt-traders-erp.appspot.com",
+    messagingSenderId: "367204121966",
+    appId: "1:367204121966:web:6513..."
   };
 
+  // 3. Connection Shuru Karein
   firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  const db_online = firebase.firestore();
 </script>
+
+<script src="script.js"></script>
 </body>
 
 
